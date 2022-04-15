@@ -1,6 +1,13 @@
 const express = require('express'); /// Commond Modules JS
 const dotenv = require('dotenv').config();
+const colors = require('colors');
 const PORT = process.env.PORT || 8000;
+
+/// Server
+const {connectDB} = require('./config/db');
+/// Connect to DB
+connectDB();
+
 
 const app = express();
 
