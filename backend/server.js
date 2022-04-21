@@ -4,29 +4,29 @@ const colors = require('colors');
 const PORT = process.env.PORT || 8000;
 
 /// Server
-const {connectDB} = require('./config/db');
+const { connectDB } = require('./config/db');
 /// Connect to DB
 connectDB();
-
 
 const app = express();
 
 /// Middleware - data must pass to this middleware
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 /// Middleware - handler Error handler
-const {errorHandler} = require('./middleware/errorMiddleware.js');
+const { errorHandler } = require('./middleware/errorMiddleware.js');
 
-app.get('/',(req,res) => {
+app.get('/', (req, res) => {
   res.status(200).json({
     message: 'Welcome to Support Desk API'
-  })
-})
+  });
+});
 
 /// ROUTES
 app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/tickets', require('./routes/ticketRoutes'));
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`)
-})
+  console.log(`Server started on port ${PORT}`);
+});
